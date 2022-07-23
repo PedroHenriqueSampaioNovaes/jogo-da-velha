@@ -125,7 +125,7 @@ body {
 
 .winning-message button,
 .wrapper-name-player button {
-  font-size: calc(1.5rem + 2vw);
+  font-size: calc(1.3rem + 2vw);
   background-color: rgba(65, 185, 131, 1);
   padding: 10px 15px;
   cursor: pointer;
@@ -144,6 +144,7 @@ body {
 .winning-message p {
   color: white;
   font-size: calc(2.8rem + 2vw);
+  text-align: center;
 }
 
 /* Mensagem de inserir nome dos jogadores */
@@ -167,7 +168,7 @@ body {
 
 .info-players label {
   color: white;
-  font-size: calc(1.4rem + 2vw);
+  font-size: calc(1.3rem + 2vw);
   margin-bottom: 20px;
   -webkit-user-select: none;
   user-select: none;
