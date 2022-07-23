@@ -33,11 +33,6 @@ class JogoDaVelha {
       [2, 4, 6],
     ];
     this.classGameOver = 'game-over';
-
-    // Bind callback functions
-    this.verifyCellClicked = this.verifyCellClicked.bind(this);
-    this.startGame = this.startGame.bind(this);
-    this.getNames = this.getNames.bind(this);
   }
 
   startGame() {
@@ -132,15 +127,22 @@ class JogoDaVelha {
     }
   }
 
+  bindEvents() {
+    this.verifyCellClicked = this.verifyCellClicked.bind(this);
+    this.startGame = this.startGame.bind(this);
+    this.getNames = this.getNames.bind(this);
+  }
+
   addClickEvent() {
     this.restartButton.addEventListener('click', this.startGame);
     this.btnReady.addEventListener('click', this.getNames);
   }
 
   init() {
+    this.bindEvents();
+    this.addClickEvent();
     this.startGame();
     this.createPlayers();
-    this.addClickEvent();
     return this;
   }
 }
