@@ -1,5 +1,5 @@
 # Jogo da Velha
-Jogo da Velha desenvolvido usando HTML, CSS e JavaScript para praticar os conhecimentos na linguagem por meio de um jogo muito conhecido! *(Principalmente entre os programadores rsrs)*.
+Jogo da Velha desenvolvido usando HTML, CSS e JavaScript para praticar os conhecimentos na linguagem por meio de um jogo muito conhecido! *(Principalmente entre os programadores iniciantes para aperfeiçoamento rsrs)*.
 
 ## Principais mecânicas:
 - Grid Layout.
