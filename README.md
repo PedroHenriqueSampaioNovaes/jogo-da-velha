@@ -6,6 +6,7 @@ Jogo da Velha desenvolvido usando HTML, CSS e JavaScript para praticar os conhec
 - Captura do nickname que o usuário passa no input
 - Alternância entre jogadas (sendo o X (xis) e o O (bolinha))
 
+<br>
 <div align="center">
-![jogo-da-velha](https://user-images.githubusercontent.com/92189897/180627109-8f726d00-6310-4cad-b9aa-154b2ebe526d.png)
+  <img src="https://user-images.githubusercontent.com/92189897/180627109-8f726d00-6310-4cad-b9aa-154b2ebe526d.png">
 </div>
