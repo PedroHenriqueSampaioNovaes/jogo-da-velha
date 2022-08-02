@@ -1,27 +1,10 @@
 class JogoDaVelha {
-  constructor(
-    board,
-    cells,
-    winningMessage,
-    winningMessageTextElement,
-    restartButton,
-    wrapperNamePlayer,
-    labelNickname,
-    inputName,
-    btnReady,
-  ) {
+  constructor(board, cells, wrapperWinMessage, winMessageText, restartButton) {
     this.board = document.querySelector(board);
     this.cellElements = document.querySelectorAll(cells);
-    this.winningMessage = document.querySelector(winningMessage);
-    this.winningMessageTextElement = document.querySelector(
-      winningMessageTextElement,
-    );
+    this.wrapperWinMessage = document.querySelector(wrapperWinMessage);
+    this.winMessageText = document.querySelector(winMessageText);
     this.restartButton = document.querySelector(restartButton);
-    this.wrapperNamePlayer = document.querySelector(wrapperNamePlayer);
-    this.labelNickname = document.querySelector(labelNickname);
-    this.inputName = document.querySelector(inputName);
-    this.btnReady = document.querySelector(btnReady);
-    this.currentPlayer = 0;
     this.winningCombinations = [
       [0, 1, 2],
       [3, 4, 5],
@@ -36,7 +19,7 @@ class JogoDaVelha {
   }
 
   startGame() {
-    this.winningMessage.classList.remove(this.classGameOver);
+    this.wrapperWinMessage.classList.remove(this.classGameOver);
     for (const cell of this.cellElements) {
       cell.classList.remove('circle');
       cell.classList.remove('x');
@@ -47,18 +30,6 @@ class JogoDaVelha {
     this.numJogada = 0;
   }
 
-  endGame() {
-    if (this.win) {
-      this.winningMessage.classList.add(this.classGameOver);
-      this.winningMessageTextElement.innerText = `${
-        this.players[this.numJogada].name
-      } Venceu!`;
-    } else {
-      this.winningMessage.classList.add(this.classGameOver);
-      this.winningMessageTextElement.innerText = 'Empate!';
-    }
-  }
-
   createPlayers() {
     this.players = [
       { name: '', icon: 'x' },
@@ -66,23 +37,15 @@ class JogoDaVelha {
     ];
   }
 
-  getNames() {
-    if (this.inputName.value) {
-      for (const player of this.players) {
-        if (player.name === '') {
-          player.name = this.inputName.value;
-          break;
-        }
-      }
-      if (this.players[0].name && !this.players[1].name) {
-        this.labelNickname.innerText = 'Insira o nome do Player 2';
-        this.inputName.value = '';
-      } else {
-        this.wrapperNamePlayer.remove();
-      }
-      this.inputName.nextElementSibling.classList.remove('active');
+  endGame() {
+    if (this.win) {
+      this.wrapperWinMessage.classList.add(this.classGameOver);
+      this.winMessageText.innerText = `${
+        this.players[this.numJogada].name
+      } Venceu!`;
     } else {
-      this.inputName.nextElementSibling.classList.add('active');
+      this.wrapperWinMessage.classList.add(this.classGameOver);
+      this.winMessageText.innerText = 'Empate!';
     }
   }
 
@@ -130,12 +93,10 @@ class JogoDaVelha {
   bindEvents() {
     this.verifyCellClicked = this.verifyCellClicked.bind(this);
     this.startGame = this.startGame.bind(this);
-    this.getNames = this.getNames.bind(this);
   }
 
   addClickEvent() {
     this.restartButton.addEventListener('click', this.startGame);
-    this.btnReady.addEventListener('click', this.getNames);
   }
 
   init() {
@@ -146,15 +107,81 @@ class JogoDaVelha {
     return this;
   }
 }
-const jogoDaVelha = new JogoDaVelha(
+
+class Login extends JogoDaVelha {
+  constructor(
+    wrapperName,
+    form,
+    inputName,
+    inputSubmit,
+    labelNickname,
+    board,
+    cells,
+    wrapperWinMessage,
+    winMessageText,
+    restartButton,
+  ) {
+    super(board, cells, wrapperWinMessage, winMessageText, restartButton);
+
+    this.wrapperName = document.querySelector(wrapperName);
+    this.forms = document.querySelector(form);
+    this.inputName = document.querySelector(inputName);
+    this.inputSubmit = document.querySelector(inputSubmit);
+    this.labelNickname = document.querySelector(labelNickname);
+
+    this.bindLoginEvents();
+    this.addLoginEvents();
+  }
+
+  validateInput() {
+    if (this.inputName.value.length > 1) {
+      this.inputSubmit.removeAttribute('disabled');
+      this.inputSubmit.classList.add('active');
+    } else {
+      this.inputSubmit.setAttribute('disabled', '');
+      this.inputSubmit.classList.remove('active');
+    }
+  }
+
+  getNames() {
+    if (this.players[0].name === '') {
+      this.players[0].name = this.inputName.value;
+      this.labelNickname.innerText = 'Insira o nome do Player 2';
+      this.inputName.value = '';
+    } else {
+      this.players[1].name = this.inputName.value;
+      this.wrapperName.remove();
+    }
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    this.getNames();
+    this.validateInput();
+  }
+
+  addLoginEvents() {
+    this.inputName.addEventListener('input', this.validateInput);
+    this.forms.addEventListener('submit', this.handleSubmit);
+  }
+
+  bindLoginEvents() {
+    this.validateInput = this.validateInput.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+}
+
+const jogoDaVelha = new Login(
+  '[data-wrapper-name]',
+  '[data-form-nickname]',
+  '[data-input-name]',
+  '[data-input-ready]',
+  '[data-label-nickname]',
   '[data-board]',
   '[data-cell]',
-  '[data-winning-message]',
+  '[data-wrapper-winning-message]',
   '[data-winning-message-text]',
   '[data-restart-button]',
-  '[data-wrapper-name-player]',
-  '[data-nickname]',
-  '[data-input-name]',
-  '[data-btn-ready]',
 );
 jogoDaVelha.init();

@@ -22,18 +22,18 @@
     <div class="cell" data-cell></div>
   </div>
 
-  <div class="winning-message" data-winning-message>
+  <div class="winning-message" data-wrapper-winning-message>
     <p data-winning-message-text>X Venceu!</p>
     <button data-restart-button>Reiniciar</button>
   </div>
 
-  <div class="wrapper-name-player" data-wrapper-name-player>
-    <form class="info-players">
-      <label for="nickname" data-nickname>Insira o nome do Player 1</label>
+  <div class="wrapper-name-player" data-wrapper-name>
+    <form class="info-players" data-form-nickname>
+      <label for="nickname" data-label-nickname>Insira o nome do Player 1</label>
       <input type="text" name="nickname" id="nickname" autocomplete="nickname" maxlength="10" data-input-name>
       <span class="erro-nome">O campo acima não está preenchido</span>
+      <input type="submit" data-input-ready disabled value="Pronto!"></input>
     </form>
-    <button data-btn-ready>Pronto!</button>
   </div>
 
   <script src="script.js"></script>
